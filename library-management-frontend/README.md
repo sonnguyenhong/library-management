@@ -41,7 +41,7 @@ CMD ["yarn", "start"]
 ```
 docker build -t <<IMAGE_NAME>> .
 ```
- > example: *```docker build -t library-management-fe```*
+ > example: *```docker build -t library-management-fe .```*
 
 - **Step 3:** Create container by running this docker image
 
