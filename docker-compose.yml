@@ -20,18 +20,5 @@ services:
       - "8000:8000"
     working_dir: /app
     restart: "always"
-    depends_on: 
-      - database
     volumes:
       - ./library-management-backend:/app
-    environment:
-      DEV_DB_HOST: database
-  
-  database: 
-    image: mongo
-    ports:
-      - "27018:27017"
-    volumes:
-      - mongodb:/data/db/
-volumes: 
-  mongodb:
