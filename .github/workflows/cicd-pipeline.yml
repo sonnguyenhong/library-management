@@ -25,8 +25,8 @@ jobs:
         uses: docker/build-push-action@v2
         id: docker_build_back
         with: 
-          context: ./library-management-backend
-          file: ./Dockerfile
+          context: ./
+          file: ./library-management-backend/Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/lib-management-backend
@@ -34,8 +34,8 @@ jobs:
         uses: docker/build-push-action@v2
         id: docker_build_front
         with: 
-          context: ./library-management-frontend
-          file: ./Dockerfile
+          context: ./
+          file: ./library-management-frontend/Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/lib-management-frontend
