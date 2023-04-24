@@ -23,7 +23,7 @@ jobs:
       
       - name: Build and Push Docker image for backend
         uses: docker/build-push-action@v2
-        id: docker_build
+        id: docker_build_back
         with: 
           context: ./library-management-backend
           file: ./Dockerfile
@@ -32,7 +32,7 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/lib-management-backend
       - name: Build and Push Docker image for frontend
         uses: docker/build-push-action@v2
-        id: docker_build
+        id: docker_build_front
         with: 
           context: ./library-management-frontend
           file: ./Dockerfile
@@ -41,4 +41,6 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/lib-management-frontend
 
       - name: Verify
-        run: echo ${{ steps.docker_build.outputs.digest }}
+        run: echo ${{ steps.docker_build_back.outputs.digest }}
+      - name: Verify
+        run: echo ${{ steps.docker_build_front.outputs.digest }}
