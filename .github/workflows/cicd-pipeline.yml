@@ -84,5 +84,6 @@ jobs:
           kubectl apply -f k8s/frontend-secret.yaml
       - name: 'Create backend/frontend deployment'
         run: |
-          kubectl apply -f k8s/backend-deployment.yaml
-          kubectl apply -f k8s/frontend-deployment.yaml
+          kubectl set image deployment/lib-backend lib-backend=hustlibrary/lib-management-backend:latest
+          kubectl set image deployment/lib-frontend lib-frontend=hustlibrary/lib-management-frontend:latest
+          
