@@ -67,3 +67,10 @@ jobs:
       - name: 'Get gcloud info'
         run: |
           gcloud info
+      - name: 'Create backend/frontend configmap and secret'
+        run: |
+          kubectl apply -f backend-configmap.yaml
+          kubectl apply -f backend-secret.yaml
+          kubectl apply -f frontend-configmap.yaml
+          kubectl apply -f frontend-secret.yaml
+        
