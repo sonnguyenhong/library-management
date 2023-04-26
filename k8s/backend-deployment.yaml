@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lib-backend
+  labels:
+    app: lib-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lib-backend
+  template:
+    metadata:
+      labels:
+        app: lib-backend
+    spec:
+      containers:
+      - name: lib-backend
+        image: hustlibrary/lib-management-backend:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DEV_DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: mongo-root-username
+        - name: DEV_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: mongo-root-password
+        - name: DEV_DB_NAME
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: mongo-root-database
+        - name: DEV_APP_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: backend-configmap
+              key: app-port
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lib-backend-service
+spec: 
+  selector:
+    app: lib-backend
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+      nodePort: 30001
