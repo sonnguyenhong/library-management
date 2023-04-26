@@ -68,7 +68,7 @@ jobs:
         run: |
           gcloud info
       - name: 'Install gke-cloud-auth-plugin'
-        run: gcloud components install gke-gcloud-auth-plugin
+        run: sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin
       - name: 'Create backend/frontend configmap and secret'
         run: |
           kubectl apply -f backend-configmap.yaml
