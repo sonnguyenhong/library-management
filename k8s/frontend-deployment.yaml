@@ -17,6 +17,7 @@ spec:
       containers:
       - name: lib-frontend
         image: hustlibrary/lib-management-frontend:latest
+        imagePullPolicy: "Always"
         ports:
         - containerPort: 3000
         env:
