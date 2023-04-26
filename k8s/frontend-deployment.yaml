@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: lib-frontend
+  labels:
+    app: lib-frontend
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lib-frontend
+  template:
+    metadata:
+      labels:
+        app: lib-frontend
+    spec:
+      containers:
+      - name: lib-frontend
+        image: hustlibrary/lib-management-frontend:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: REACT_APP_BACKEND_URL
+          valueFrom:
+            secretKeyRef:
+              name: frontend-secret
+              key: backend-url
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lib-frontend-service
+spec:
+  selector:
+    app: lib-frontend
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+      nodePort: 30002
