@@ -50,11 +50,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Authenticate and setup gcloud
-        uses: google-github-actions/setup-gcloud@v1
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
         with:
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
-      - name: Connect to cluster
-        run: |
-          gcloud container clusters get-credentials autopilot-cluster-1 --region asia-east2 --project testproject-319403
-      
+          workload_identity_provider: 'projects/testproject-319403/locations/global/workloadIdentityPools/k8s-workload-provider/providers/oidc-provider'
+          service_account: 'k8s-service-account@testproject-319403.iam.gserviceaccount.com'
