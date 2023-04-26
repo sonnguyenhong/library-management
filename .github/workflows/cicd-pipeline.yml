@@ -67,6 +67,8 @@ jobs:
       - name: 'Get gcloud info'
         run: |
           gcloud info
+      - name: 'Install gke-cloud-auth-plugin'
+        run: gcloud components install gke-gcloud-auth-plugin
       - name: 'Create backend/frontend configmap and secret'
         run: |
           kubectl apply -f backend-configmap.yaml
