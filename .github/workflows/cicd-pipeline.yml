@@ -58,5 +58,5 @@ jobs:
         uses: 'google-github-actions/auth@v1'
         with:
           token_format: 'access_token'
-          workload_identity_provider: 'projects/testproject-319403/locations/global/workloadIdentityPools/k8s-workload-provider/providers/oidc-provider'
+          workload_identity_provider: 'projects/85976304942/locations/global/workloadIdentityPools/k8s-workload-provider/providers/oidc-provider'
           service_account: 'k8s-service-account@testproject-319403.iam.gserviceaccount.com'
