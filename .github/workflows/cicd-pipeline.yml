@@ -78,8 +78,8 @@ jobs:
           gcloud components list
       - name: 'Create backend/frontend configmap and secret'
         run: |
-          kubectl apply -f backend-configmap.yaml
-          kubectl apply -f backend-secret.yaml
-          kubectl apply -f frontend-configmap.yaml
-          kubectl apply -f frontend-secret.yaml
+          kubectl apply -f k8s/backend-configmap.yaml
+          kubectl apply -f k8s/backend-secret.yaml
+          kubectl apply -f k8s/frontend-configmap.yaml
+          kubectl apply -f k8s/frontend-secret.yaml
         
