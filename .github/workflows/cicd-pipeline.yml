@@ -47,6 +47,7 @@ jobs:
 
   deploy-to-gke:
     runs-on: ubuntu-latest
+    needs: docker
     permissions:
       contents: 'read'
       id-token: 'write'
