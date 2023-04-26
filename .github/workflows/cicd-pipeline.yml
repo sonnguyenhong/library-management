@@ -44,3 +44,17 @@ jobs:
         run: echo ${{ steps.docker_build_back.outputs.digest }}
       - name: Verify
         run: echo ${{ steps.docker_build_front.outputs.digest }}
+
+  deploy-to-gke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Authenticate and setup gcloud
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+      - name: Connect to cluster
+        run: |
+          gcloud container clusters get-credentials autopilot-cluster-1 --region asia-east2 --project testproject-319403
+      
