@@ -1,8 +1,10 @@
 const express = require('express');
+const swaggerUI = require('swagger-ui-express');
 const { default: helmet } = require('helmet');
 const morgan = require('morgan');
 const compression = require('compression');
 const { StatusCodes, ReasonPhrases } = require('./constants/httpStatusCodes');
+const specs = require('../docs');
 const app = express();
 
 // init middlewares
@@ -19,6 +21,7 @@ require('./dbs/init.mongodb');
 
 // init routes
 app.use('/', require('./routes'));
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 
 // handling errors
 app.use((req, res, next) => {
