@@ -8,5 +8,6 @@ const router = express.Router();
 // check permission
 
 // routes
+router.use('/api/v1', require('./authRoutes'));
 
 module.exports = router;
