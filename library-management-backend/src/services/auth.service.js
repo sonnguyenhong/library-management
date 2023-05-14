@@ -8,6 +8,7 @@ const { getInfoData } = require('../utils');
 
 class AuthService {
     static logout = async (keyStore) => {
+        console.log(789)
         const delKey = await KeyTokenService.removeKeyById(keyStore._id);
         return delKey;
     }
@@ -25,7 +26,7 @@ class AuthService {
 
         const accessTokenSecret = crypto.randomBytes(64).toString('hex');
         const refreshTokenSecret = crypto.randomBytes(64).toString('hex');
-        const tokens = await createTokenPair({ userId: existedUser._id, username }, accessTokenSecret, refreshTokenSecret);
+        const tokens = await createTokenPair({ userId: existedUser._id, username, jobTitle: existedUser.jobTitle }, accessTokenSecret, refreshTokenSecret);
 
         await KeyTokenService.createKeyToken({
             userId: existedUser._id,

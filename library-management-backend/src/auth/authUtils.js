@@ -45,21 +45,26 @@ const authentication = asyncHandler(async (req, res, next) => {
     }
 
     const keyStore = await KeyTokenService.findByUserId(userId);
+    console.log(456);
     if (!keyStore) {
         throw new NotFoundError('Not found key store');
     }
 
-    const accessToken = req.headers[HEADER.AUTHORIZATION];
+    const bearerAccessToken = req.headers[HEADER.AUTHORIZATION];
+    const accessToken = bearerAccessToken.split(" ")[1];
+    console.log(req.headers);
+    console.log(accessToken);
     if (!accessToken) {
         throw new AuthFailureError('Invalid request');
     }
 
     try {
-        const decodeUser = JWT.verify(accessToken, keyStore.publicKey);
+        const decodeUser = JWT.verify(accessToken, keyStore.accessTokenSecret);
         if (userId !== decodeUser.userId) {
             throw new AuthFailureError('Invalid user');
         }
         req.keyStore = keyStore;
+        req.jobTitle = decodeUser.jobTitle;
         return next();
     } catch (error) {
         throw error;
