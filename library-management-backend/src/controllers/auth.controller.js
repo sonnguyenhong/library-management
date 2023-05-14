@@ -5,6 +5,7 @@ const AuthService = require('../services/auth.service');
 
 class AuthController {
     logout = async (req, res, next) => {
+        console.log('req', req);
         new SuccessResponse({
             message: 'Logout success!',
             metadata: await AuthService.logout(req.keyStore),

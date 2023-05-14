@@ -9,6 +9,10 @@ const router = express.Router();
 /**
  * @swagger
  *  components:
+ *      securitySchemes:
+ *          BearerAuth:
+ *              type: http
+ *              scheme: bearer
  *      schemas:
  *          Authentication: 
  *              type: object
@@ -38,6 +42,21 @@ const router = express.Router();
  *                      type: array
  *                      items:
  *                          type: string
+ *          KeyToken: 
+ *              type: object
+ *              properties: 
+ *                  user: 
+ *                      type: string
+ *                  refreshTokenSecret:
+ *                      type: string
+ *                  accessTokenSecret: 
+ *                      type: string
+ *                  refreshTokensUsed: 
+ *                      type: array
+ *                      items: 
+ *                          type: string
+ *                  refreshToken:
+ *                      type: string
  */
 
 
@@ -81,6 +100,28 @@ router.post('/login', asyncHandler(authController.login));
 // authentication
 router.use(authentication);
 // auth routes
+/**
+ * @swagger
+ * /logout:
+ *  post:
+ *      summary: Used to log user out
+ *      description: Log user out of the system
+ *      security: 
+ *          - BearerAuth: []
+ *      parameters:
+ *          - in: header
+ *            name: x-client-id
+ *            schema: 
+ *              type: string
+ *            required: true
+ *      responses:
+ *          200: 
+ *              description: Logged Out Successfully
+ *              content: 
+ *                  application/json:
+ *                      schema:
+ *                          $ref: '#components/schemas/KeyToken'
+ */
 router.post('/logout', asyncHandler(authController.logout));
 
 module.exports = router;

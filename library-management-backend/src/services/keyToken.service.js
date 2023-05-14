@@ -24,11 +24,12 @@ class KeyTokenService {
     };
 
     static findByUserId = async (userId) => {
-        return await KeyToken.findOne({ user: Types.ObjectId(userId) }).lean();
+        console.log(123);
+        return await KeyToken.findOne({ user: new Types.ObjectId(userId) }).lean();
     };
 
     static removeKeyById = async (id) => {
-        return await KeyToken.remove(id);
+        return await KeyToken.findOneAndRemove({ _id: id });
     };
 }
 
