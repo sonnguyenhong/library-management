@@ -8,7 +8,6 @@ const { getInfoData } = require('../utils');
 
 class AuthService {
     static logout = async (keyStore) => {
-        console.log(789)
         const delKey = await KeyTokenService.removeKeyById(keyStore._id);
         return delKey;
     }

@@ -45,15 +45,12 @@ const authentication = asyncHandler(async (req, res, next) => {
     }
 
     const keyStore = await KeyTokenService.findByUserId(userId);
-    console.log(456);
     if (!keyStore) {
         throw new NotFoundError('Not found key store');
     }
 
     const bearerAccessToken = req.headers[HEADER.AUTHORIZATION];
     const accessToken = bearerAccessToken.split(" ")[1];
-    console.log(req.headers);
-    console.log(accessToken);
     if (!accessToken) {
         throw new AuthFailureError('Invalid request');
     }

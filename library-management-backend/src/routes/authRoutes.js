@@ -9,6 +9,13 @@ const router = express.Router();
 /**
  * @swagger
  *  components:
+ *      parameters: 
+ *          userIdParam: 
+ *              in: header
+ *              name: x-client-id
+ *              required: true
+ *              schema:
+ *                  type: string
  *      securitySchemes:
  *          BearerAuth:
  *              type: http
@@ -25,6 +32,8 @@ const router = express.Router();
  *              type: object
  *              properties:
  *                  username:
+ *                      type: string
+ *                  password:
  *                      type: string
  *                  fullname: 
  *                      type: string
@@ -66,6 +75,8 @@ const router = express.Router();
  *  get:
  *      summary: This is test api summary
  *      description: This is test api description
+ *      tags:
+ *          - Test API
  *      responses:
  *          200: 
  *              description: Test Get method
@@ -80,6 +91,8 @@ router.get('/', (req, res) => {
  *  post:
  *      summary: Used to log user in
  *      description: Get username and password to log user in the system
+ *      tags:
+ *          - Auth
  *      requestBody:
  *          description: Username and password are required
  *          required: true
@@ -106,14 +119,12 @@ router.use(authentication);
  *  post:
  *      summary: Used to log user out
  *      description: Log user out of the system
+ *      tags:
+ *          - Auth
  *      security: 
  *          - BearerAuth: []
  *      parameters:
- *          - in: header
- *            name: x-client-id
- *            schema: 
- *              type: string
- *            required: true
+ *          - $ref: '#/components/parameters/userIdParam'
  *      responses:
  *          200: 
  *              description: Logged Out Successfully
