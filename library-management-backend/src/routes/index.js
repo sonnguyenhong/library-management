@@ -12,5 +12,7 @@ const PREFIX = '/api/v1';
 // routes
 router.use(PREFIX, require('./authRoutes'));
 router.use(`${PREFIX}/users`, require('./userRoutes'));
+router.use(`${PREFIX}/documents`, require('./documentRoutes'));
+router.use(`${PREFIX}/documentDetails`, require('./documentDetailRoutes'));
 
 module.exports = router;

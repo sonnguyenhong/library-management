@@ -66,6 +66,63 @@ const router = express.Router();
  *                          type: string
  *                  refreshToken:
  *                      type: string
+ * 
+ *          Document:
+ *              type: object
+ *              properties: 
+ *                  code:
+ *                      type: string
+ *                  name:
+ *                      type: string
+ *                  category:
+ *                      type: string
+ *                  department:
+ *                      type: string
+ *                  author:
+ *                      type: array
+ *                      items:
+ *                          type: string
+ *                  publisher:
+ *                      type: string
+ *                  publishedYear:
+ *                      type: number
+ *                  language:
+ *                      type: string
+ *                  summaryContent:
+ *                      type: string
+ *                  numberOfPages:
+ *                      type: number
+ *                  paperSize:
+ *                      type: string
+ *                  republishedTime:
+ *                      type: number
+ *                  coverPrice:
+ *                      type: number
+ *                  issueNumber:
+ *                      type: number
+ *                  issueDate:
+ *                      type: string
+ *                      format: date
+ *                  quantity:
+ *                      type: number
+ *                  position:
+ *                      type: string
+ * 
+ *          DocumentDetail:
+ *              type: object
+ *              properties:
+ *                  barcode:
+ *                      type: string
+ *                  document:
+ *                      type: string
+ *                  barcodeImage:
+ *                      type: string
+ *                  updatedBy: 
+ *                      type: string
+ *                  status: 
+ *                      type: string
+ *                  isProcessed:
+ *                      type: boolean    
  */
 
 
