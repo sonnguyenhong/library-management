@@ -1,4 +1,5 @@
 const express = require('express');
+require('dotenv').config();
 const swaggerUI = require('swagger-ui-express');
 const { default: helmet } = require('helmet');
 const morgan = require('morgan');

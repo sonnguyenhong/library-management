@@ -10,9 +10,9 @@ const PREFIX = '/api/v1';
 // check permission
 
 // routes
-router.use(PREFIX, require('./authRoutes'));
 router.use(`${PREFIX}/users`, require('./userRoutes'));
 router.use(`${PREFIX}/documents`, require('./documentRoutes'));
 router.use(`${PREFIX}/documentDetails`, require('./documentDetailRoutes'));
+router.use(PREFIX, require('./authRoutes'));
 
 module.exports = router;

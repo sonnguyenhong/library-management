@@ -1,9 +1,36 @@
 const DocumentModel = require('../models/document.model');
-const DocumentDetailModel = require('../models/documentDetail.model');
+const dbConnection = require('mongoose').connection;
+const documentDetailModel = require('../models/documentDetail.model');
 
 class DocumentService {
+    static async getAllDocuments() {
+        return await DocumentModel.find();
+    }
+
+    static async getDocumentById(id) {
+        return await DocumentModel.findById(id)
+    }
+
     static async createDocument(payload) {
         return await new Document(payload).createDocument();
+    }
+
+    static async updateDocument(id, payload) {
+        return await new Document(payload).updateDocument(id);
+    }
+
+    static async deleteDocument(id) {
+        const session = await dbConnection.startSession();
+        await session.withTransaction(async () => {
+            const deletedDoc = await DocumentModel.findByIdAndDelete(id).session(session);
+            await documentDetailModel.deleteMany({
+                document: id
+            }).session(session);
+            return deletedDoc;
+        })
+
+        session.endSession();
+        console.log('Success');
     }
 }
 
@@ -33,6 +60,10 @@ class Document {
 
     async createDocument() {
         return await DocumentModel.create(this);
+    }
+
+    async updateDocument(id) {
+        return await DocumentModel.findByIdAndUpdate(id, this);
     }
 }
 
