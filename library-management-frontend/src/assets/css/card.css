@@ -1,0 +1,12 @@
+.ant-card-head {
+  border-bottom: 0px !important;
+}
+.card-content {
+  font-size: 20;
+  font-weight: 600;
+  position: relative;
+  bottom: 30px;
+  display: flex;
+
+  justify-content: space-between;
+}
