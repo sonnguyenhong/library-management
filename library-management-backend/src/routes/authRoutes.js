@@ -123,6 +123,60 @@ const router = express.Router();
  *                      type: string
  *                  isProcessed:
  *                      type: boolean    
+ *          
+ *          Reader: 
+ *              type: object
+ *              properties: 
+ *                  name:
+ *                      type: string
+ *                  birthYear:
+ *                      type: number
+ *                  gender: 
+ *                      type: string
+ *                  readerType: 
+ *                      type: string
+ *                  department:
+ *                      type: string
+ *                  _class: 
+ *                      type: string
+ *                  phoneNumber:
+ *                      type: string
+ *                  email:
+ *                      type: string
+ *                  cardImage: 
+ *                      type: string
+ *                  isProcess:
+ *                      type: boolean
+ *          ReaderCard:
+ *              type: object
+ *              properties:
+ *                  reader:
+ *                      type: string
+ *                  cardNumber:
+ *                      type: string
+ *                  registrationCode:
+ *                      type: string
+ *                  cardBarcodeImage:
+ *                      type: string
+ *                  issuedDate:
+ *                      type: string
+ *                      format: date
+ *                  expiredDate:
+ *                      type: string
+ *                      format: date
+ *                  status:
+ *                      type: string
+ *                  registrationMethod:
+ *                      type: string
+ *                  registrationType:
+ *                      type: string
+ *                  registrationDate:
+ *                      type: string
+ *                      format: date
+ *                  isPay:
+ *                      type: boolean
+ *                  updatedBy:
+ *                      type: string
  */
 
 

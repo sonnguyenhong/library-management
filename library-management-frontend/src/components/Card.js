@@ -1,0 +1,34 @@
+import { Card, Avatar } from "antd";
+
+import "../assets/css/card.css";
+
+
+
+function cardComponent(props) {
+  const {
+    title,
+    icon,
+    iconBackground,
+    content,
+    iconColor,
+    cardWidth
+  } = props;
+  const cardStyle = { marginTop: 16, width: cardWidth, height: 120, fontSize: 20, borderRadius:20 };
+  return (
+    <Card style={cardStyle} title={title} className="card">
+      <div className="card-content">
+        <div>{content}</div>
+        <Avatar
+          style={{
+            background: iconBackground,
+            justifyContent: "center",
+            color: iconColor ?? "#fff"
+          }}
+          size={40}
+          src={icon}
+        />
+      </div>
+    </Card>
+  );
+}
+export default cardComponent;

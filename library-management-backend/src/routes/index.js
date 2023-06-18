@@ -10,6 +10,8 @@ const PREFIX = '/api/v1';
 // check permission
 
 // routes
+router.use(`${PREFIX}/reader-cards`, require('./readerCardRoutes'));
+router.use(`${PREFIX}/readers`, require('./readerRoutes'));
 router.use(`${PREFIX}/users`, require('./userRoutes'));
 router.use(`${PREFIX}/documents`, require('./documentRoutes'));
 router.use(`${PREFIX}/documentDetails`, require('./documentDetailRoutes'));

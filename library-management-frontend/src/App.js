@@ -1,14 +1,11 @@
-import logo from "./logo.svg";
 import "./App.css";
-
+import Login from "./pages/Login"
+import Home from "./pages/home";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello World, I'm Nguyen Hong Son Updated!</p>
-      </header>
-    </div>
+    <Home/>
+    // <Login/>
+
   );
 }
 
