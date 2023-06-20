@@ -1,5 +1,5 @@
 import { Card, Image, Row, Col } from "antd";
-import "../assets/css/book-card.css";
+import "../assets/css/components/book-card.css";
 
 function BookCardComponent(props) {
   const { image, bookName, author, language, pages } = props;
@@ -7,7 +7,7 @@ function BookCardComponent(props) {
     width: 325,
     height: 147,
     boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.3)",
-    padding: 0
+    padding: 0,
   };
   return (
     <Card

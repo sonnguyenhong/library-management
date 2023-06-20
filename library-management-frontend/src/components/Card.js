@@ -1,6 +1,6 @@
 import { Card, Avatar } from "antd";
 
-import "../assets/css/card.css";
+import "../assets/css/components/card.css";
 
 
 
