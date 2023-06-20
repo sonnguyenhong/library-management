@@ -89,6 +89,7 @@ function Home() {
               content="50.000"
               iconBackground="#FBBE18"
               cardWidth="25%"
+              cardHeight="120"
             />
             <CardComponent
               icon={<BiBookReader />}
@@ -96,6 +97,7 @@ function Home() {
               content="50.000"
               iconBackground="#00C81F"
               cardWidth="25%"
+              cardHeight="120"
             />
             <CardComponent
               icon={<FaUserFriends />}
@@ -103,6 +105,7 @@ function Home() {
               content="50.000"
               iconBackground="#6FA4D8"
               cardWidth="25%"
+              cardHeight="120"
             />
           </Row>
           <h2 className="content-title">Quick options</h2>
