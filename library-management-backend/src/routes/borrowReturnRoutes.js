@@ -48,7 +48,7 @@ router.get('/:id', asyncHandler(borrowReturnController.getBorrowReturnById));
 /**
  * @swagger
  * /borrow-returns:
- *  get:
+ *  post:
  *      summary: This is api to create new borrow return
  *      description: This is api to create new borrow return
  *      tags:
