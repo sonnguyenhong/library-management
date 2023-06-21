@@ -1,0 +1,37 @@
+img.logo {
+    height: 2.25em;
+    width: 2.2em;
+}
+
+h1 {
+    Fill: Solid#6FA4D8;
+    text-align: center;
+    color: #6FA4D8;
+    font-size: 1em;
+    margin-top: 0;
+    margin-bottom: 0.1em;
+}
+
+
+.logo-header {
+    display: flex;
+}
+
+.img {
+    margin-left: 6em;
+    height: 2em;
+    width: 3em;
+    margin-top: 1em;
+}
+
+h2 {
+    text-align: center;
+     color: #FBBE18;
+     font-size: 1em;
+     margin-top: 0.6em;
+     margin-bottom: 0.1em;
+}
+    
+
+
+

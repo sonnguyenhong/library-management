@@ -69,15 +69,13 @@ p {
 form {
     height: 15em;
 }
-span {
-    color: #FBBE18;
-}
 .forgot-pw {
     text-align: right;
     margin-right: 110px;
 }
 .signup {
     margin-top: 100px;
+    color: #FBBE18;
 }
 .error-feedback {
     color: red;
