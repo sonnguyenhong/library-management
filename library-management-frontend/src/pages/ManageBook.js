@@ -16,6 +16,8 @@ import BookCardComponent from "../components/BookCard";
 import TextInputComponent from "../components/TextInput";
 import SelectInputComponent from "../components/SeletectInput";
 import ImageInputComponent from "../components/ImageInput";
+import ImageAreaComponent from "../components/TextArea";
+import TextAreaComponent from "../components/TextArea";
 
 const { Header, Content, Sider } = Layout;
 
@@ -59,7 +61,7 @@ function ManageBook() {
             <div className="slider-item">
               <div>
                 <AiTwotoneHome style={iconStyle} />
-                Home
+                Trang chủ
               </div>
             </div>
             <div className="slider-item">
@@ -71,13 +73,25 @@ function ManageBook() {
             <div className="slider-item">
               <div>
                 <IoLibrary style={iconStyle} />
-                Manager Book
+                Quản lý tài liệu
               </div>
             </div>
             <div className="slider-item">
               <div>
                 <FaUserFriends style={iconStyle} />
-                Member
+                Thành viên
+              </div>
+            </div>
+            <div className="slider-item">
+              <div>
+                <IoLibrary style={iconStyle} />
+                Mượn tài liệu
+              </div>
+            </div>
+            <div className="slider-item">
+              <div>
+                <IoLibrary style={iconStyle} />
+                Trả tài liệu
               </div>
             </div>
           </div>
@@ -186,7 +200,7 @@ function ManageBook() {
             </div>
             <Modal
               className="Modal"
-              title="Add Member"
+              title="Add book"
               centered
               open={open}
               onOk={() => setOpen(false)}
@@ -194,7 +208,7 @@ function ManageBook() {
               okText="Confirm"
               width={1145}
               bodyStyle={{
-                height: 350,
+                height: 550,
                 padding: 70,
               }}
             >
@@ -207,17 +221,17 @@ function ManageBook() {
                   <TextInputComponent
                     width={300}
                     height={40}
-                    name={"Book code"}
-                    label={"Book code"}
-                    placeholder="Book code"
+                    name={"Mã tài liệu"}
+                    label={"Mã tài liệu"}
+                    placeholder="Mã tài liệu"
                     required={true}
                   />
                   <TextInputComponent
                     width={300}
                     height={40}
-                    name={"Name"}
-                    label={"Name"}
-                    placeholder="Name"
+                    name={"Tên"}
+                    label={"Tên"}
+                    placeholder="Tên"
                     required={true}
                   />
                   <SelectInputComponent
@@ -229,11 +243,11 @@ function ManageBook() {
                     ruleType="string"
                     required={true}
                     listSelect={[
-                      { label: "Technology", value: "Technology" },
-                      { label: "Economics", value: "Economics" },
-                      { label: "Philosophy", value: "Philosophy" },
-                      { label: "Curriculum", value: "Curriculum" },
-                      { label: "Novel", value: "Novel" },
+                      { label: "Công nghệ", value: "Technology" },
+                      { label: "Kinh tế", value: "Economics" },
+                      { label: "Triết học", value: "Philosophy" },
+                      { label: "Giáo trình", value: "Curriculum" },
+                      { label: "Tiểu thuyết", value: "Novel" },
                     ]}
                   />
                 </Row>
@@ -245,26 +259,26 @@ function ManageBook() {
                   <TextInputComponent
                     width={300}
                     height={40}
-                    name={"Author"}
-                    label={"Author"}
-                    placeholder="Author"
+                    name={"Tác giả"}
+                    label={"Tác giả"}
+                    placeholder="Tác giả"
                     required={true}
                   />
 
                   <TextInputComponent
                     width={300}
                     height={40}
-                    name={"Publisher"}
-                    label={"Publisher"}
-                    placeholder="Publisher"
+                    name={"Nhà xuất bản"}
+                    label={"Nhà xuất bản"}
+                    placeholder="Nhà xuất bản"
                     required={true}
                   />
                   <TextInputComponent
                     width={300}
                     height={40}
-                    name={"Department"}
-                    label={"Department"}
-                    placeholder="Department"
+                    name={"Ngành/Khoa"}
+                    label={"Ngành/Khoa"}
+                    placeholder="Ngành/Khoa"
                     ruleType="string"
                   />
                 </Row>
@@ -276,9 +290,9 @@ function ManageBook() {
                   <SelectInputComponent
                     width={150}
                     height={40}
-                    name={"Language"}
-                    label={"Language"}
-                    placeholder={"Language"}
+                    name={"Ngôn ngữ"}
+                    label={"Ngôn ngữ"}
+                    placeholder={"Ngôn ngữ"}
                     ruleType="string"
                     required={true}
                     listSelect={[
@@ -290,36 +304,43 @@ function ManageBook() {
                   <TextInputComponent
                     width={150}
                     height={40}
-                    name={"Year of publication"}
-                    label={"Year of publication"}
+                    name={"Năm xuất bản"}
+                    label={"Năm xuất bản"}
                     placeholder="2023"
                     ruleType="string"
                   />
                   <TextInputComponent
                     width={150}
                     height={40}
-                    name={"Page"}
-                    label={"Page"}
-                    placeholder="Page"
+                    name={"Số trang"}
+                    label={"Số trang"}
+                    placeholder="Số trang"
                     ruleType="string"
                   />
                   <TextInputComponent
                     width={150}
                     height={40}
-                    name={"Location"}
-                    label={"Location"}
-                    placeholder="Location"
+                    name={"Vị trí"}
+                    label={"Vị trí"}
+                    placeholder="Vị trí"
                     ruleType="string"
                   />
                   <ImageInputComponent
                     width={150}
                     height={40}
-                    name={"Image"}
-                    label={"Image"}
+                    name={"Ảnh bìa"}
+                    label={"Ảnh bìa"}
                     placeholder="Upload"
                     ruleType="string"
                   />
                 </Row>
+                <TextAreaComponent
+                  name={"Nội dung"}
+                  label={"Nội dung"}
+                  height={150}
+                  placeholder="Tóm tắt nội dung sách"
+                  ruleType="string"
+                />
               </Form>
             </Modal>
           </Content>
