@@ -177,6 +177,30 @@ const router = express.Router();
  *                      type: boolean
  *                  updatedBy:
  *                      type: string
+ *          BorrowReturn:
+ *              type: object
+ *              properties:
+ *                  cardNumber:
+ *                      type: string
+ *                  documentDetail:
+ *                      type: string
+ *                  borrowType:
+ *                      type: string
+ *                  borrowDate:
+ *                      type: string
+ *                      format: date
+ *                  provider:
+ *                      type: string
+ *                  expiredDate:
+ *                      type: string
+ *                      format: date
+ *                  type:
+ *                      type: string
+ *                  returnDate:
+ *                      type: string
+ *                      format: date
+ *                  receiver:
+ *                      type: string
  */
 
 

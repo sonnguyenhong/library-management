@@ -34,5 +34,10 @@ module.exports = {
     ONLINE_REGISTRATION_METHOD: 'Online',
     OFFLINE_REGISTRATION_METHOD: 'Offline',
     RE_REGISTRATION_TYPE: 'Re-registration',
-    CREATE_NEW_REGISTRATION_TYPE: 'Create new'
+    CREATE_NEW_REGISTRATION_TYPE: 'Create new',
+
+    BORROW_RETURN_DOCUMENT_NAME: 'BorrowReturn',
+    BORROW_RETURN_COLLECTION_NAME: 'BorrowReturns',
+    BORROW_TYPE: 'Borrow',
+    RETURN_TYPE: 'Return',
 }
