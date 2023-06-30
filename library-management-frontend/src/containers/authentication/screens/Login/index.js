@@ -32,7 +32,7 @@ function Login() {
     };
     useEffect(() => {
         if (user.authState === REQUEST_STATE.SUCCESS) {
-            navigate('/home');
+            navigate('/');
         }
         if (user?.authState === REQUEST_STATE.ERROR) {
             notification.error({

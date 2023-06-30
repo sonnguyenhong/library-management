@@ -1,0 +1,49 @@
+.header-bar {
+  display: flex;
+}
+
+.slider-item {
+  height: 66px;
+  font-size: 18px;
+  font-weight: 600;
+}
+.slider-item div {
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.manage-book .content-title {
+  color: black;
+  font-size: 20px;
+  font-weight: 600;
+  position: relative;
+  text-align: start;
+  padding: 10px 0px 20px 20px;
+}
+.content-body {
+  height: 75%;
+  background-color: #fff;
+  margin: 0px 24px 24px 24px;
+  padding-bottom: 100px;
+  border-radius: 10px;
+}
+.ant-btn-icon svg path {
+  stroke: #fff;
+}
+
+.ant-modal-title {
+  text-align: center;
+  color: #6fa4d8 !important;
+  font-size: 26px !important ;
+}
+
+.ant-select-selector {
+  height: 40px !important;
+  align-items: center;
+  border-radius: 10px !important;
+}
+
+.ant-btn-primary {
+  background-color: #6fa4d8;
+}

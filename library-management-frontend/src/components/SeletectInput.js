@@ -19,7 +19,7 @@ function SelectInputComponent(props) {
           width: width ?? "100%",
           height: height ?? "100%",
         }}
-        defaultValue={listSelect[0].label}
+        defaultValue={listSelect[0].value}
         options={listSelect}
       ></Select>
     </Form.Item>

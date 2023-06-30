@@ -4,6 +4,8 @@ import './App.css';
 import Login from 'containers/authentication/screens/Login';
 import { Route, Router, Routes } from 'react-router-dom';
 import Home from 'containers/app/screens/Home';
+import AppLayout from 'containers/app/screens/Layout/AppLayout';
+import ManageBook from 'containers/app/screens/ManageBook/ManageBook';
 function App() {
     function estimateTime(
         id, // the "id" prop of the Profiler tree that has just committed
@@ -26,8 +28,8 @@ function App() {
         <Profiler id="Main" onRender={estimateTime}>
             <Suspense fallback={<Spin />}>
               <Routes>
-                  <Route exact path="/" element={<Login />} />
-                  <Route exact path="/home" element={<Home />} />
+                  <Route exact path="/login" element={<Login />} />
+                  <Route exact path="/*" element={<AppLayout />} />
               </Routes>
               
             </Suspense>
