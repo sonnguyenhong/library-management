@@ -59,7 +59,7 @@ jobs:
         uses: 'google-github-actions/auth@v1'
         with:
           token_format: 'access_token'
-          workload_identity_provider: 'projects/1053516120338/locations/global/workloadIdentityPools/k8s-provider/providers/k8s-provider'
+          workload_identity_provider: 'projects/1053516120338/locations/global/workloadIdentityPools/k8s-pool/providers/k8s-provider'
           service_account: 'hust-lib@hust-391516.iam.gserviceaccount.com'
       - name: 'Connect to gke cluster'
         run: |
