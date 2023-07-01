@@ -82,8 +82,10 @@ jobs:
           kubectl apply -f k8s/backend-secret.yaml
           kubectl apply -f k8s/frontend-configmap.yaml
           kubectl apply -f k8s/frontend-secret.yaml
-      - name: 'Create backend/frontend deployment'
-        run: |
-          kubectl rollout restart deployment/lib-frontend
-          kubectl rollout restart deployment/lib-backend
+          kubectl apply -f k8s/frontend-deployment.yaml
+          kubectl apply -f k8s/backend-deployment.yaml
+      # - name: 'Restart backend/frontend deployment'
+      #   run: |
+      #     kubectl rollout restart deployment/lib-frontend
+      #     kubectl rollout restart deployment/lib-backend
           
