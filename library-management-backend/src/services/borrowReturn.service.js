@@ -2,11 +2,11 @@ const BorrowReturnModel = require('../models/borrowReturn.model');
 
 class BorrowReturnService {
     static async getAllBorrowReturns() {
-        return await BorrowReturnModel.find();
+        return await BorrowReturnModel.find().populate('document', 'name');
     }
 
-    static async getBorrowReturnById() {
-        return await BorrowReturnModel.findById(id);
+    static async getBorrowReturnById(id) {
+        return await BorrowReturnModel.findById(id).populate('document', 'name');
     }
 
     static async createBorrowReturn(payload) {
@@ -20,11 +20,11 @@ class BorrowReturnService {
 
 class BorrowReturn {
     constructor({
-        cardNumber, documentDetail, borrowType, borrowDate, 
+        cardNumber, document, borrowType, borrowDate, 
         provider, expiredDate, type, returnDate, receiver
     }) {
         this.cardNumber = cardNumber;
-        this.documentDetail = documentDetail;
+        this.document = document;
         this.borrowType = borrowType;
         this.borrowDate = borrowDate;
         this.provider = provider;

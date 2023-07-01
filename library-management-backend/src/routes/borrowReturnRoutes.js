@@ -16,6 +16,10 @@ router.use(authentication);
  *  get:
  *      summary: This is api to get all borrow returns
  *      description: This is api to get all borrow returns
+ *      security: 
+ *          - BearerAuth: []
+ *      parameters:
+ *          - $ref: '#/components/parameters/userIdParam'
  *      tags:
  *          - BorrowReturn
  *      responses:
@@ -30,9 +34,12 @@ router.get('/', asyncHandler(borrowReturnController.getAllBorrowReturns));
  *  get:
  *      summary: This is api to get borrow return by id
  *      description: This is api to get borrow return by id
+ *      security: 
+ *          - BearerAuth: []
  *      tags:
  *          - BorrowReturn
  *      parameters:
+ *          - $ref: '#/components/parameters/userIdParam'
  *          - in: path
  *            name: id
  *            schema: 
