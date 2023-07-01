@@ -1,5 +1,5 @@
 const { model, Schema, Types } = require('mongoose');
-const { BORROW_RETURN_DOCUMENT_NAME, BORROW_RETURN_COLLECTION_NAME, READER_CARD_DOCUMENT_NAME, DOCUMENT_DETAIL_DOCUMENT_NAME, USER_DOCUMENT_NAME, BORROW_TYPE, RETURN_TYPE } = require('../constants/schema.constants');
+const { BORROW_RETURN_DOCUMENT_NAME, BORROW_RETURN_COLLECTION_NAME, READER_CARD_DOCUMENT_NAME, DOCUMENT_DETAIL_DOCUMENT_NAME, USER_DOCUMENT_NAME, BORROW_TYPE, RETURN_TYPE, DOCUMENT_DOCUMENT_NAME } = require('../constants/schema.constants');
 
 const borrowReturnSchema = new Schema(
     {
@@ -8,9 +8,9 @@ const borrowReturnSchema = new Schema(
             ref: READER_CARD_DOCUMENT_NAME,
             required: true,
         },
-        documentDetail: {
+        document: {
             type: Schema.Types.ObjectId,
-            ref: DOCUMENT_DETAIL_DOCUMENT_NAME,
+            ref: DOCUMENT_DOCUMENT_NAME,
             required: true,
         },
         borrowType: {

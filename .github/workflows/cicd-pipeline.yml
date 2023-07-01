@@ -45,45 +45,45 @@ jobs:
       - name: Verify
         run: echo ${{ steps.docker_build_front.outputs.digest }}
 
-  # deploy-to-gke:
-  #   runs-on: ubuntu-latest
-  #   needs: docker
-  #   permissions:
-  #     contents: 'read'
-  #     id-token: 'write'
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
-  #     - id: 'auth'
-  #       name: 'Authenticate to Google Cloud'
-  #       uses: 'google-github-actions/auth@v1'
-  #       with:
-  #         token_format: 'access_token'
-  #         workload_identity_provider: 'projects/85976304942/locations/global/workloadIdentityPools/k8s-workload-provider/providers/oidc-provider'
-  #         service_account: 'k8s-service-account@testproject-319403.iam.gserviceaccount.com'
-  #     - name: 'Connect to gke cluster'
-  #       run: |
-  #         gcloud container clusters get-credentials autopilot-cluster-1 --region asia-east2 --project testproject-319403
-  #     - name: 'Get gcloud info'
-  #       run: |
-  #         gcloud info
-  #     - name: 'Install gke-cloud-auth-plugin'
-  #       run: |
-  #         gcloud components list
-  #         echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-  #         curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
-  #         sudo apt update
-  #         sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin
-  #         echo "##vso[task.setvariable variable=USE_GKE_GCLOUD_AUTH_PLUGIN]True"
-  #         gcloud components list
-  #     - name: 'Create backend/frontend configmap and secret'
-  #       run: |
-  #         kubectl apply -f k8s/backend-configmap.yaml
-  #         kubectl apply -f k8s/backend-secret.yaml
-  #         kubectl apply -f k8s/frontend-configmap.yaml
-  #         kubectl apply -f k8s/frontend-secret.yaml
-  #     - name: 'Create backend/frontend deployment'
-  #       run: |
-  #         kubectl rollout restart deployment/lib-frontend
-  #         kubectl rollout restart deployment/lib-backend
+  deploy-to-gke:
+    runs-on: ubuntu-latest
+    needs: docker
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          token_format: 'access_token'
+          workload_identity_provider: 'projects/1053516120338/locations/global/workloadIdentityPools/k8s-pool/providers/k8s-provider'
+          service_account: 'hust-lib@hust-391516.iam.gserviceaccount.com'
+      - name: 'Connect to gke cluster'
+        run: |
+          gcloud container clusters get-credentials autopilot-cluster-1 --region us-central1 --project hust-391516
+      - name: 'Get gcloud info'
+        run: |
+          gcloud info
+      - name: 'Install gke-cloud-auth-plugin'
+        run: |
+          gcloud components list
+          echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+          curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+          sudo apt update
+          sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin
+          echo "##vso[task.setvariable variable=USE_GKE_GCLOUD_AUTH_PLUGIN]True"
+          gcloud components list
+      - name: 'Create backend/frontend configmap and secret'
+        run: |
+          kubectl apply -f k8s/backend-configmap.yaml
+          kubectl apply -f k8s/backend-secret.yaml
+          kubectl apply -f k8s/frontend-configmap.yaml
+          kubectl apply -f k8s/frontend-secret.yaml
+      - name: 'Restart backend/frontend deployment'
+        run: |
+          kubectl rollout restart deployment/lib-frontend
+          kubectl rollout restart deployment/lib-backend
           

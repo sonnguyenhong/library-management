@@ -182,7 +182,7 @@ const router = express.Router();
  *              properties:
  *                  cardNumber:
  *                      type: string
- *                  documentDetail:
+ *                  document:
  *                      type: string
  *                  borrowType:
  *                      type: string
