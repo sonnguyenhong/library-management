@@ -1,33 +1,33 @@
 import { combineReducers } from 'redux';
 import { REQUEST_STATE } from '../../../../../app-configs';
 import {
-    GET_LIST_BOOK,
-    GET_LIST_BOOK_SUCCESS,
-    GET_LIST_BOOK_FAIL,
-    RESET_GET_LIST_BOOK,
-    CREATE_BOOK,
-    CREATE_BOOK_SUCCESS,
-    CREATE_BOOK_FAIL,
-    RESET_CREATE_BOOK,
-    DELETE_BOOK,
-    DELETE_BOOK_SUCCESS,
-    DELETE_BOOK_FAIL,
-    RESET_DELETE_BOOK_BOOK,
+    GET_LIST_BR,
+    GET_LIST_BR_FAIL,
+    GET_LIST_BR_SUCCESS,
+    RESET_GET_LIST_BR,
+    CREATE_BR,
+    CREATE_BR_SUCCESS,
+    CREATE_BR_FAIL,
+    RESET_CREATE_BR,
+    DELETE_BR,
+    DELETE_BR_SUCCESS,
+    DELETE_BR_FAIL,
+    RESET_DELETE_BR,
 } from './action';
 
 const defaultState = {
     state: undefined,
     data: [],
 };
-export function createBookReducer(state = defaultState, action) {
+export function createBrReducer(state = defaultState, action) {
     switch (action.type) {
-        case CREATE_BOOK().type: {
+        case CREATE_BR().type: {
             return {
                 ...state,
                 state: REQUEST_STATE.REQUEST,
             };
         }
-        case CREATE_BOOK_SUCCESS().type: {
+        case CREATE_BR_SUCCESS().type: {
             const { data } = action.payload;
             return {
                 ...state,
@@ -35,13 +35,15 @@ export function createBookReducer(state = defaultState, action) {
                 state: REQUEST_STATE.SUCCESS,
             };
         }
-        case CREATE_BOOK_FAIL().type: {
+        case CREATE_BR_FAIL().type: {
+            const { error } = action.payload;
             return {
                 ...state,
                 state: REQUEST_STATE.ERROR,
+                error: error
             };
         }
-        case RESET_CREATE_BOOK().type: {
+        case RESET_CREATE_BR().type: {
             return {
                 ...defaultState,
             };
@@ -51,25 +53,25 @@ export function createBookReducer(state = defaultState, action) {
             return state;
     }
 }
-export default function booksReducer(state = defaultState, action) {
+export default function brReducer(state = defaultState, action) {
     switch (action.type) {
-        case GET_LIST_BOOK().type:
+        case GET_LIST_BR().type:
             return {
                 ...state,
                 state: REQUEST_STATE.REQUEST,
             };
-        case GET_LIST_BOOK_SUCCESS().type:
+        case GET_LIST_BR_SUCCESS().type:
             return {
                 ...state,
                 data: action.payload?.data,
                 state: REQUEST_STATE.SUCCESS,
             };
-        case GET_LIST_BOOK_FAIL().type:
+        case GET_LIST_BR_FAIL().type:
             return {
                 ...state,
                 state: REQUEST_STATE.ERROR,
             };
-        case RESET_GET_LIST_BOOK().type:
+        case RESET_GET_LIST_BR().type:
             return {
                 ...defaultState,
             };
@@ -77,25 +79,25 @@ export default function booksReducer(state = defaultState, action) {
             return state;
     }
 }
-export function deleteBooksReducer(state = defaultState, action) {
+export function deleteBrReducer(state = defaultState, action) {
     switch (action.type) {
-        case DELETE_BOOK().type:
+        case DELETE_BR().type:
             return {
                 ...state,
                 state: REQUEST_STATE.REQUEST,
             };
-        case DELETE_BOOK_SUCCESS().type:
+        case DELETE_BR_SUCCESS().type:
             return {
                 ...state,
                 data: action.payload?.data,
                 state: REQUEST_STATE.SUCCESS,
             };
-        case DELETE_BOOK_FAIL().type:
+        case DELETE_BR_FAIL().type:
             return {
                 ...state,
                 state: REQUEST_STATE.ERROR,
             };
-        case RESET_DELETE_BOOK_BOOK().type:
+        case RESET_DELETE_BR().type:
             return {
                 ...defaultState,
             };

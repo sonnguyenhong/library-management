@@ -1,9 +1,9 @@
 import { TOKEN_KEY, REQUEST_STATE } from '../../app-configs';
-import { POST , GET, DELETE} from '../../app-data/fetch';
+import { POST, GET, DELETE } from '../../app-data/fetch';
 
-export const apiGetListBook = async () => {
+export const apiGetListBr = async () => {
     try {
-        const response = await GET('/documents', {}, { isFullPath: false });
+        const response = await GET('/borrow-returns', {}, { isFullPath: false });
         return {
             state: REQUEST_STATE.SUCCESS,
             data: response,
@@ -17,9 +17,9 @@ export const apiGetListBook = async () => {
         };
     }
 };
-export const apiCreateBook = async (body) => {
+export const apiCreateBr = async (body) => {
     try {
-        const response = await POST('/documents', body, { isFullPath: false });
+        const response = await POST('/borrow-returns', body, { isFullPath: false });
         return {
             state: REQUEST_STATE.SUCCESS,
             data: response,
@@ -33,9 +33,9 @@ export const apiCreateBook = async (body) => {
         };
     }
 };
-export const apiDeleteBook = async (id) => {
+export const apiDeleteBr = async (id) => {
     try {
-        const response = await DELETE(`/documents/${id}`, { isFullPath: false });
+        const response = await DELETE(`/borrow-returns/${id}`, { isFullPath: false });
         return {
             state: REQUEST_STATE.SUCCESS,
             data: response,

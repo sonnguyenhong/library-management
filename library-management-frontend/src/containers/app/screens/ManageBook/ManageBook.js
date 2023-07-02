@@ -13,7 +13,7 @@ import NumberInputComponent from '../../../../components/NumberInput';
 import SelectInputComponent from '../../../../components//SeletectInput';
 import TextAreaComponent from '../../../../components/TextArea';
 import BookDetailModal from '../../../../components/BookDetailModal';
-import { CREATE_BOOK, GET_LIST_BOOK } from './redux/action';
+import { CREATE_BOOK, DELETE_BOOK, GET_LIST_BOOK } from './redux/action';
 import { useDispatch, useSelector } from 'react-redux';
 import DateInputComponent from 'components/DatePicker';
 import FullPageLoading from 'components/Loading/FullPageLoading/FullPageLoading';
@@ -28,12 +28,13 @@ function ManageBook() {
 
     const [currentPage, setCurrentPage] = useState(0);
     const [listBooks, setListBooks] = useState([]);
-    const itemsPerPage = 12;
+    const itemsPerPage = 9;
     const dispatch = useDispatch();
     const [form] = Form.useForm();
 
     const books = useSelector((state) => state?.books);
     const createBook = useSelector((state) => state?.createBook);
+    const deleteBook = useSelector((state) => state?.deleteBook);
 
     useEffect(() => {
         dispatch(GET_LIST_BOOK());
@@ -57,6 +58,24 @@ function ManageBook() {
             setListBooks(chunkedBooks[currentPage]);
         }
     }, [books?.data?.metadata, currentPage]);
+
+    useEffect(() => {
+        if (deleteBook?.state === REQUEST_STATE.SUCCESS || createBook?.state === REQUEST_STATE.SUCCESS) {
+            notification.success({
+                message: 'Thành công',
+                description: 'Thành công!',
+            });
+            setCreateModalOpen(false);
+            setDetailModalOpen(false);
+            dispatch(GET_LIST_BOOK());
+        }
+        if (deleteBook?.state === REQUEST_STATE.ERROR || createBook?.state === REQUEST_STATE.ERROR) {
+            notification.error({
+                message: 'Thất bại',
+                description: 'Đã có lỗi xảy ra!',
+            });
+        }
+    }, [deleteBook?.state, createBook.state]);
 
     const handlePageChange = ({ selected }) => {
         setCurrentPage(selected);
@@ -152,7 +171,7 @@ function ManageBook() {
                                 </Button>
                             </Row>
                             <Space
-                                size={[20, 30]}
+                                size={[108, 30]}
                                 wrap
                                 style={{
                                     paddingLeft: 40,
@@ -187,20 +206,6 @@ function ManageBook() {
                                 form.validateFields()
                                     .then((values) => {
                                         dispatch(CREATE_BOOK(values));
-                                        if (createBook.state === REQUEST_STATE.SUCCESS) {
-                                            notification.success({
-                                                message: 'Thành công',
-                                                description: 'Đã thêm tài liệu thành công!',
-                                            });
-                                            setCreateModalOpen(false);
-                                            dispatch(GET_LIST_BOOK());
-                                        }
-                                        if (createBook?.state === REQUEST_STATE.ERROR) {
-                                            notification.error({
-                                                message: 'Lỗi',
-                                                description: 'Vui lòng kiểm tra lại thông tin!',
-                                            });
-                                        }
                                     })
                                     .catch((info) => {
                                         console.log('Validate Failed:', info);
@@ -216,7 +221,7 @@ function ManageBook() {
                                 padding: '20, 70, 70, 70',
                             }}
                         >
-                            {createBook.state == REQUEST_STATE.REQUEST ? (
+                            {createBook.state == REQUEST_STATE.REQUEST || deleteBook.state == REQUEST_STATE.REQUEST ? (
                                 <FullPageLoading opacity={0.5} />
                             ) : (
                                 <div></div>
@@ -401,7 +406,9 @@ function ManageBook() {
                         </Modal>
                         <BookDetailModal
                             open={detailModal}
-                            onCancel={() => setDetailModalOpen(false)}
+                            onCancel={() => {
+                                dispatch(DELETE_BOOK(selectedBook._id));
+                            }}
                             code={selectedBook?.code}
                             name={selectedBook?.name}
                             category={selectedBook?.category}

@@ -67,9 +67,7 @@ String.prototype.formatDate = function () {
 
 export function removeEmptyPropertyOfObject(params) {
     if (params) {
-        return Object.fromEntries(
-            Object.entries(params).filter(([_, v]) => v != null || v != undefined),
-        );
+        return Object.fromEntries(Object.entries(params).filter(([_, v]) => v != null || v != undefined));
     } else {
         return {};
     }
@@ -77,4 +75,9 @@ export function removeEmptyPropertyOfObject(params) {
 
 export function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+export function formatDate(dateString) {
+    const formattedDate = format(new Date(dateString), 'dd/MM/yyyy');
+    return formattedDate;
 }

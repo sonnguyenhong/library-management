@@ -12,6 +12,8 @@ import LogoHeader from '../../../../components/LogoHeader';
 import { Routes, Route, useNavigate, Link } from 'react-router-dom';
 import Home from '../Home/Home';
 import ManageBook from '../ManageBook/ManageBook';
+import BorrowReturn from '../BorrowReturn/BorrowReturn';
+import Reader from '../Reader/Reader';
 
 const { Header, Footer, Sider } = Layout;
 function AppLayout() {
@@ -50,24 +52,19 @@ function AppLayout() {
                             label: 'Trang chủ',
                         },
                         {
-                            key: '/dashboard',
-                            icon: <BsBarChartFill />,
-                            label: 'Dashboard',
-                        },
-                        {
                             key: '/manage-book',
                             icon: <IoLibrary />,
                             label: 'Quản lý tài liệu',
                         },
                         {
-                            key: '/borrow-document',
+                            key: '/borrow-return',
                             icon: <FaUserFriends />,
-                            label: 'Mượn tài liệu',
+                            label: 'Mượn trả tài liệu',
                         },
                         {
-                            key: '/return-book',
-                            icon: <IoLibrary />,
-                            label: 'Trả tài liệu',
+                            key: '/readers',
+                            icon: <FaUserFriends />,
+                            label: 'Quản lý bạn đọc',
                         },
                     ]}
                 />
@@ -76,10 +73,25 @@ function AppLayout() {
             <Layout style={{ background: '#fff' }}>
                 <Routes>
                     <Route exact path="/" element={<Home />} />
-                    <Route exact path="/dashboard" element={<div>dashboard</div>} />
                     <Route exact path="/manage-book" element={<ManageBook />} />
-                    <Route exact path="/borrow-document" element={<div>borrow-document</div>} />
-                    <Route exact path="/manage-book" element={<div>manage-book</div>} />
+                    <Route
+                        exact
+                        path="/borrow-return"
+                        element={
+                            <div>
+                                <BorrowReturn />
+                            </div>
+                        }
+                    />
+                    <Route
+                        exact
+                        path="/readers"
+                        element={
+                            <div>
+                                <Reader />
+                            </div>
+                        }
+                    />
                 </Routes>
             </Layout>
         </Layout>
