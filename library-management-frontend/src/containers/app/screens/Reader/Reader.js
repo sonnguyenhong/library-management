@@ -41,6 +41,10 @@ function Reader() {
 
     useEffect(() => {
         if (createReader?.state === REQUEST_STATE.SUCCESS) {
+            notification.success({
+                message: 'Thành công',
+                description: 'Thành công!',
+            });
             setCreateModalOpen(false);
             dispatch(GET_LIST_READER());
         }
@@ -143,17 +147,11 @@ function Reader() {
             },
         },
     ];
-    const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-
-    const handleRowSelection = (selectedRowKeys) => {
-        setSelectedRowKeys(selectedRowKeys);
-    };
 
     const handleRowClick = (row) => {
         // Access the value of the clicked row
         setRowId(row.id);
         setDetailModalOpen(true);
-        console.log(row.id);
     };
 
     const rowClickProps = (row) => {

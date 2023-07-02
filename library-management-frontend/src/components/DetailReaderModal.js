@@ -1,5 +1,5 @@
-import { Card, Image, Row, Col, Modal, Table, Form, Input, Tag, Button, Space, notification } from 'antd';
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import { Row, Modal, Table, Form, Tag, Button, Space, notification } from 'antd';
+import React, { useEffect, useState } from 'react';
 import { LockOutlined, DeleteOutlined } from '@ant-design/icons';
 import { GrAdd } from 'react-icons/gr';
 import { format } from 'date-fns';
@@ -7,94 +7,15 @@ import { format } from 'date-fns';
 import '../assets/css/components/detail-reader-modal.css';
 import TextInputComponent from './TextInput';
 import SelectInputComponent from './SeletectInput';
-import NumberInputComponent from './NumberInput';
 import DateInputComponent from './DatePicker';
 import { useDispatch, useSelector } from 'react-redux';
 import { CREATE_READER_CARD } from 'containers/app/screens/Reader/redux/action';
 import { GET_READER_DETAIL } from 'containers/app/screens/Reader/redux/action';
 import { REQUEST_STATE } from 'app-configs';
 import FullPageLoading from './Loading/FullPageLoading/FullPageLoading';
-const columns = [
-    {
-        title: 'Số thẻ',
-        dataIndex: 'cardNumber',
-        key: 'cardNumber',
-        render: (text) => (
-            <a
-                style={{
-                    color: '#333',
-                    fontWeight: 'bold',
-                }}
-            >
-                {text}
-            </a>
-        ),
-    },
-    {
-        title: 'Ngày phát hành',
-        dataIndex: 'issuedDate',
-        key: 'issuedDate',
-    },
-    {
-        title: 'Ngày hết hạn',
-        dataIndex: 'expiredDate',
-        key: 'expiredDate',
-    },
-    {
-        title: 'Hình thức đăng ký',
-        dataIndex: 'registrationMethod',
-        key: 'registrationMethod',
-    },
-    {
-        title: 'Loại',
-        dataIndex: 'registrationType',
-        key: 'registrationType',
-    },
-    {
-        title: 'Ngày đăng ký',
-        dataIndex: 'registrationDate',
-        key: 'registrationDate',
-    },
-    {
-        title: 'Thanh toán',
-        dataIndex: 'isPay',
-        key: 'isPay',
-    },
-    {
-        title: 'Trạng thái',
-        dataIndex: 'status',
-        key: 'status',
-        render: (text) => <Tag color={text == 'Hoạt động' ? 'green' : 'volcano'}>{text}</Tag>,
-    },
-    {
-        title: 'Khoá/Xóa',
-        key: 'action',
-        render: (_, record) => (
-            <Space
-                size="small"
-                style={{
-                    justifyContent: 'center',
-                    display: 'flex',
-                }}
-            >
-                <LockOutlined
-                    style={{
-                        color: '#FBBE18',
-                    }}
-                />
+import { DELETE_READER_CARD } from 'containers/app/screens/Reader/redux/action';
+import { UPDATE_READER_CARD } from 'containers/app/screens/Reader/redux/action';
 
-                <DeleteOutlined
-                    style={{
-                        color: '#E86201',
-                    }}
-                    onClick={() => {
-                        console.log('Delete');
-                    }}
-                />
-            </Space>
-        ),
-    },
-];
 const checkActiveOrExistCard = (readerCards) => {
     if (readerCards == null || readerCards.length == 0) return false;
     else {
@@ -108,16 +29,27 @@ function ReaderDetailModal(props) {
     const dispatch = useDispatch();
     const createReaderCard = useSelector((state) => state?.createReaderCard);
     const getReaderDetail = useSelector((state) => state?.getReaderDetail);
+    const deleteReaderCard = useSelector((state) => state?.deleteReaderCard);
+    const updateReaderCard = useSelector((state) => state?.updateReaderCard);
 
     useEffect(() => {
         dispatch(GET_READER_DETAIL(readerId));
     }, [dispatch, readerId]);
 
     useEffect(() => {
-        if (createReaderCard?.state == REQUEST_STATE.SUCCESS) {
+        if (
+            createReaderCard?.state === REQUEST_STATE.SUCCESS ||
+            deleteReaderCard?.state === REQUEST_STATE.SUCCESS ||
+            updateReaderCard?.state === REQUEST_STATE.SUCCESS
+        ) {
+            notification.success({
+                message: 'Thành công',
+                description: 'Thành công!',
+            });
             dispatch(GET_READER_DETAIL(readerId));
         }
-    }, [createReaderCard?.state, dispatch, readerId]);
+    }, [createReaderCard?.state, deleteReaderCard?.state, updateReaderCard?.state, dispatch, readerId]);
+
     const rowStyle = {
         justifyContent: 'space-between',
         marginTop: 10,
@@ -166,6 +98,130 @@ function ReaderDetailModal(props) {
         registrationType: 'Create new',
         isPay: true,
     };
+
+    const handleConfirmDelete = (id) => {
+        Modal.confirm({
+            title: 'Xác nhận',
+            content: 'Bạn có chắc muốn xóa không?',
+            onOk: () => {
+                dispatch(DELETE_READER_CARD(id));
+            },
+            onCancel: () => {
+                console.log('Cancelled');
+            },
+        });
+    };
+    const handleConfirmLock = (id, body) => {
+        Modal.confirm({
+            title: 'Xác nhận',
+            content: 'Bạn có chắc muốn khóa thẻ này không?',
+            onOk: () => {
+                dispatch(UPDATE_READER_CARD({ id: id, body: body }));
+            },
+            onCancel: () => {
+                console.log('Cancelled');
+            },
+        });
+    };
+    const columns = [
+        {
+            title: 'Số thẻ',
+            dataIndex: 'cardNumber',
+            key: 'cardNumber',
+            render: (text) => (
+                <a
+                    style={{
+                        color: '#333',
+                        fontWeight: 'bold',
+                    }}
+                >
+                    {text}
+                </a>
+            ),
+        },
+        {
+            title: 'Ngày phát hành',
+            dataIndex: 'issuedDate',
+            key: 'issuedDate',
+        },
+        {
+            title: 'Ngày hết hạn',
+            dataIndex: 'expiredDate',
+            key: 'expiredDate',
+        },
+        {
+            title: 'Hình thức đăng ký',
+            dataIndex: 'registrationMethod',
+            key: 'registrationMethod',
+        },
+        {
+            title: 'Loại',
+            dataIndex: 'registrationType',
+            key: 'registrationType',
+        },
+        {
+            title: 'Ngày đăng ký',
+            dataIndex: 'registrationDate',
+            key: 'registrationDate',
+        },
+        {
+            title: 'Thanh toán',
+            dataIndex: 'isPay',
+            key: 'isPay',
+        },
+        {
+            title: 'Trạng thái',
+            dataIndex: 'status',
+            key: 'status',
+            render: (text) => <Tag color={text == 'Hoạt động' ? 'green' : 'volcano'}>{text}</Tag>,
+        },
+        {
+            title: 'Khoá/Xóa',
+            key: 'action',
+            render: (text, record, index) => (
+                <Space
+                    size="small"
+                    style={{
+                        justifyContent: 'center',
+                        display: 'flex',
+                    }}
+                >
+                    <LockOutlined
+                        style={{
+                            color: '#FBBE18',
+                        }}
+                        onClick={() => {
+                            const data = getReaderDetail.data.metadata.readerCards[index];
+                            const updateData = {
+                                reader: data.reader,
+                                cardNumber: data.cardNumber,
+                                registrationCode: data.registrationCode,
+                                cardBarcodeImage: data.cardBarcodeImage,
+                                issuedDate: data.issuedDate,
+                                expiredDate: data.expiredDate,
+                                status: data.status == 'Active' ? 'Locked' : 'Active',
+                                registrationMethod: data.registrationMethod,
+                                registrationType: data.registrationType,
+                                registrationDate: data.registrationDate,
+                                isPay: data.isPay,
+                                updatedBy: data.updatedBy,
+                            };
+                            handleConfirmLock(data._id, updateData);
+                        }}
+                    />
+
+                    <DeleteOutlined
+                        style={{
+                            color: '#E86201',
+                        }}
+                        onClick={() => {
+                            handleConfirmDelete(record._id);
+                        }}
+                    />
+                </Space>
+            ),
+        },
+    ];
     return (
         <div>
             <Modal
@@ -177,6 +233,7 @@ function ReaderDetailModal(props) {
                 width={1300}
                 cancelText={'Xóa'}
                 okText={'Sửa'}
+                footer={null}
             >
                 <div
                     className="content"
@@ -290,6 +347,7 @@ function ReaderDetailModal(props) {
                                 cardBarcodeImage: 'string',
                             });
                             dispatch(CREATE_READER_CARD(values));
+
                             setChildModalVisible(false);
                         })
                         .catch((info) => {

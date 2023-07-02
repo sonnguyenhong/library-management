@@ -99,3 +99,53 @@ export function RESET_CREATE_READER_CARD(payload) {
         payload,
     };
 }
+
+/// Delete reader card
+export function DELETE_READER_CARD(payload) {
+    return {
+        type: 'DELETE_READER_CARD',
+        payload,
+    };
+}
+export function DELETE_READER_CARD_SUCCESS(payload) {
+    return {
+        type: 'DELETE_READER_CARD_SUCCESS',
+        payload,
+    };
+}
+export function DELETE_READER_CARD_FAIL(payload) {
+    return {
+        type: 'DELETE_READER_CARD_FAIL',
+        payload,
+    };
+}
+export function RESET_DELETE_READER_CARD(payload) {
+    return {
+        type: 'RESET_DELETE_READER_CARD',
+        payload,
+    };
+}
+export function UPDATE_READER_CARD(payload) {
+    return {
+        type: 'UPDATE_READER_CARD',
+        payload,
+    };
+}
+export function UPDATE_READER_CARD_SUCCESS(payload) {
+    return {
+        type: 'UPDATE_READER_CARD_SUCCESS',
+        payload,
+    };
+}
+export function UPDATE_READER_CARD_FAIL(payload) {
+    return {
+        type: 'UPDATE_READER_CARD_FAIL',
+        payload,
+    };
+}
+export function RESET_UPDATE_READER_CARD(payload) {
+    return {
+        type: 'RESET_UPDATE_READER_CARD',
+        payload,
+    };
+}

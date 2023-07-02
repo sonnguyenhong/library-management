@@ -9,7 +9,9 @@ import brReducer, { createBrReducer, deleteBrReducer } from '../../containers/ap
 import readerReducer, {
     createReaderCardReducer,
     createReaderReducer,
+    deleteReaderCardReducer,
     getReaderDetailReducer,
+    updateReaderCardReducer,
 } from '../../containers/app/screens/Reader/redux/reducer';
 
 const createReducer = (asyncReducers) => {
@@ -25,6 +27,8 @@ const createReducer = (asyncReducers) => {
         createReader: createReaderReducer,
         getReaderDetail: getReaderDetailReducer,
         createReaderCard: createReaderCardReducer,
+        deleteReaderCard: deleteReaderCardReducer,
+        updateReaderCard: updateReaderCardReducer,
         ...asyncReducers,
     });
 };

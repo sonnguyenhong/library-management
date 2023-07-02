@@ -1,5 +1,5 @@
 import { TOKEN_KEY, REQUEST_STATE } from '../../app-configs';
-import { POST, GET, DELETE } from '../../app-data/fetch';
+import { POST, GET, DELETE, PUT } from '../../app-data/fetch';
 
 export const apiCreateReaderCard = async (body) => {
     try {
@@ -33,9 +33,9 @@ export const apiDeleteReaderCard = async (id) => {
         };
     }
 };
-export const apiUpdateReaderCard = async (body) => {
+export const apiUpdateReaderCard = async ({ id, body }) => {
     try {
-        const response = await PUT('/reader-cards', body, { isFullPath: false });
+        const response = await PUT(`/reader-cards/${id}`, body, { isFullPath: false });
         return {
             state: REQUEST_STATE.SUCCESS,
             data: response,

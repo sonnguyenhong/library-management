@@ -19,6 +19,16 @@ import {
     RESET_GET_READER_DETAIL,
     CREATE_READER_CARD,
     RESET_CREATE_READER_CARD,
+    CREATE_READER_CARD_FAIL,
+    CREATE_READER_CARD_SUCCESS,
+    DELETE_READER_CARD,
+    DELETE_READER_CARD_SUCCESS,
+    DELETE_READER_CARD_FAIL,
+    RESET_DELETE_READER_CARD,
+    UPDATE_READER_CARD,
+    UPDATE_READER_CARD_SUCCESS,
+    UPDATE_READER_CARD_FAIL,
+    RESET_UPDATE_READER_CARD,
 } from './action';
 
 const defaultState = {
@@ -130,7 +140,7 @@ export function createReaderCardReducer(state = defaultState, action) {
                 state: REQUEST_STATE.REQUEST,
             };
         }
-        case CREATE_READER_SUCCESS().type: {
+        case CREATE_READER_CARD_SUCCESS().type: {
             const { data } = action.payload;
             return {
                 ...state,
@@ -138,7 +148,7 @@ export function createReaderCardReducer(state = defaultState, action) {
                 state: REQUEST_STATE.SUCCESS,
             };
         }
-        case CREATE_READER_FAIL().type: {
+        case CREATE_READER_CARD_FAIL().type: {
             const { error } = action.payload;
             return {
                 ...state,
@@ -147,6 +157,75 @@ export function createReaderCardReducer(state = defaultState, action) {
             };
         }
         case RESET_CREATE_READER_CARD().type: {
+            return {
+                ...defaultState,
+            };
+        }
+
+        default:
+            return state;
+    }
+}
+/// delete Reader card
+export function deleteReaderCardReducer(state = defaultState, action) {
+    switch (action.type) {
+        case DELETE_READER_CARD().type: {
+            return {
+                ...state,
+                state: REQUEST_STATE.REQUEST,
+            };
+        }
+        case DELETE_READER_CARD_SUCCESS().type: {
+            const { data } = action.payload;
+            return {
+                ...state,
+                data: data,
+                state: REQUEST_STATE.SUCCESS,
+            };
+        }
+        case DELETE_READER_CARD_FAIL().type: {
+            const { error } = action.payload;
+            return {
+                ...state,
+                state: REQUEST_STATE.ERROR,
+                error: error,
+            };
+        }
+        case RESET_DELETE_READER_CARD().type: {
+            return {
+                ...defaultState,
+            };
+        }
+
+        default:
+            return state;
+    }
+}
+export function updateReaderCardReducer(state = defaultState, action) {
+    switch (action.type) {
+        case UPDATE_READER_CARD().type: {
+            return {
+                ...state,
+                state: REQUEST_STATE.REQUEST,
+            };
+        }
+        case UPDATE_READER_CARD_SUCCESS().type: {
+            const { data } = action.payload;
+            return {
+                ...state,
+                data: data,
+                state: REQUEST_STATE.SUCCESS,
+            };
+        }
+        case UPDATE_READER_CARD_FAIL().type: {
+            const { error } = action.payload;
+            return {
+                ...state,
+                state: REQUEST_STATE.ERROR,
+                error: error,
+            };
+        }
+        case RESET_UPDATE_READER_CARD().type: {
             return {
                 ...defaultState,
             };
