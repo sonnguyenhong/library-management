@@ -1,5 +1,5 @@
 const { model, Schema, Types } = require('mongoose');
-const { READER_COLLECTION_NAME, READER_DOCUMENT_NAME, USER_DOCUMENT_NAME, USER_MALE_GENDER, USER_FEMALE_GENDER, USER_OTHER_GENDER, LECTURER, STUDENT, ONLINE_REGISTRATION_METHOD, OFFLINE_REGISTRATION_METHOD, RE_REGISTRATION_TYPE, CREATE_NEW_REGISTRATION_TYPE } = require('../constants/schema.constants');
+const { READER_COLLECTION_NAME, READER_DOCUMENT_NAME, USER_DOCUMENT_NAME, USER_MALE_GENDER, USER_FEMALE_GENDER, USER_OTHER_GENDER, LECTURER, STUDENT, ONLINE_REGISTRATION_METHOD, OFFLINE_REGISTRATION_METHOD, RE_REGISTRATION_TYPE, CREATE_NEW_REGISTRATION_TYPE, READER_CARD_DOCUMENT_NAME } = require('../constants/schema.constants');
 
 const readerSchema = new Schema(
     {
@@ -38,12 +38,15 @@ const readerSchema = new Schema(
         },
         cardImage: {
             type: String,
-            required: true,
         },
         isProcess: {
             type: Boolean,
             required: true,
-        }
+        },
+        readerCards: [{
+            type: Schema.Types.ObjectId,
+            ref: READER_CARD_DOCUMENT_NAME
+        }]
     }, 
     {
         timestamps: true,
