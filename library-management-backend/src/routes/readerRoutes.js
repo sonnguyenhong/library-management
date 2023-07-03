@@ -7,6 +7,8 @@ const { authentication } = require('../auth/authUtils');
 const { isAdmin } = require('../middlewares/access.middleware');
 const router = express.Router();
 
+
+router.get('/', asyncHandler(readerController.getAllReaders));
 // authentication
 router.use(authentication);
 
@@ -26,7 +28,7 @@ router.use(authentication);
  *          200: 
  *              description: Get all readers successfully
  */
-router.get('/', asyncHandler(readerController.getAllReaders));
+
 
 /**
  * @swagger

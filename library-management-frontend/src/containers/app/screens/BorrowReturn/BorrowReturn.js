@@ -82,7 +82,7 @@ function BorrowReturn() {
     const data = returnData.map((value) => ({
         id: value._id,
         document: value.document?._id ?? '',
-        cardNumber: value.cardNumber,
+        cardNumber: value?.cardNumber.cardNumber,
         documentName: value.document?.name ?? '',
         borrowType: value.borrowType,
         borrowDate: formatDate(value.borrowDate),
