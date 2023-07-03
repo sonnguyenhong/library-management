@@ -7,6 +7,7 @@ const { authentication } = require('../auth/authUtils');
 const { isAdmin } = require('../middlewares/access.middleware');
 const router = express.Router();
 
+router.get('/', asyncHandler(borrowReturnController.getAllBorrowReturns));
 // authentication
 router.use(authentication);
 
@@ -26,7 +27,7 @@ router.use(authentication);
  *          200: 
  *              description: Get all borrow returns successfully
  */
-router.get('/', asyncHandler(borrowReturnController.getAllBorrowReturns));
+
 
 /**
  * @swagger
