@@ -33,7 +33,7 @@ export const apiDeleteReaderCard = async (id) => {
         };
     }
 };
-export const apiUpdateReaderCard = async ({ id, body }) => {
+export const apiUpdateReaderCard = async (id, body) => {
     try {
         const response = await PUT(`/reader-cards/${id}`, body, { isFullPath: false });
         return {
