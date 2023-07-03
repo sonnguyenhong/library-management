@@ -49,9 +49,6 @@
   },
   "devDependencies": {
     "@hot-loader/react-dom": "^17.0.2",
-    "babel-eslint": "^10.1.0",
-    "babel-plugin-module-resolver": "^4.1.0",
-    "babel-plugin-transform-remove-console": "^6.9.4",
     "eslint": "^7.11.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.22.0",

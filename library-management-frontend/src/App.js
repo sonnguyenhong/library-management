@@ -3,7 +3,6 @@ import { Spin } from 'antd';
 import './App.css';
 import Login from 'containers/authentication/screens/Login';
 import { Route, Router, Routes } from 'react-router-dom';
-import Home from 'containers/app/screens/Home';
 import AppLayout from 'containers/app/screens/Layout/AppLayout';
 import ManageBook from 'containers/app/screens/ManageBook/ManageBook';
 function App() {
@@ -27,11 +26,10 @@ function App() {
     return (
         <Profiler id="Main" onRender={estimateTime}>
             <Suspense fallback={<Spin />}>
-              <Routes>
-                  <Route exact path="/login" element={<Login />} />
-                  <Route exact path="/*" element={<AppLayout />} />
-              </Routes>
-              
+                <Routes>
+                    <Route exact path="/" element={<Login />} />
+                    <Route exact path="/app/*" element={<AppLayout />} />
+                </Routes>
             </Suspense>
         </Profiler>
     );

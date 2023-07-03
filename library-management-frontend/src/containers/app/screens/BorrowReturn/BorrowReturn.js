@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import './borrow-return.css';
 import { Layout, Form, Input, Row, Col, Button, Modal, notification, Space, Table, Tag } from 'antd';
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { RetweetOutlined } from '@ant-design/icons';
 import { BiSearch } from 'react-icons/bi';
 import { GrAdd } from 'react-icons/gr';
 import TextInputComponent from '../../../../components/TextInput';
@@ -18,6 +18,7 @@ const { Header, Content } = Layout;
 
 function BorrowReturn() {
     const [createModal, setCreateModalOpen] = useState(false);
+    const [returnModal, setReturnModalOpen] = useState(false);
     const [detailModal, setDetailModalOpen] = useState(false);
 
     const [borrowSelect, setBorrowSelect] = useState('Borrow');
@@ -138,34 +139,20 @@ function BorrowReturn() {
             },
         },
         {
-            title: 'Sửa/Xóa',
+            title: 'Trả',
             key: 'action',
             render: (_, record) => (
-                <Space
-                    size="middle"
-                    style={{
-                        display: 'flex',
-                    }}
-                >
-                    <EditOutlined
-                        style={{
-                            color: '#6fa4d8',
-                            fontSize: 18,
-                        }}
-                    />
-                    <Button
-                        type="text"
-                        icon={
-                            <DeleteOutlined
-                                style={{
-                                    color: 'red',
-                                    fontSize: 18,
-                                }}
-                            />
-                        }
-                        // onClick={() => dispatch(DELETE_BR(record.id))}
-                    />
-                </Space>
+                <Button
+                    type="text"
+                    icon={
+                        <RetweetOutlined
+                            style={{
+                                color: '#fbbe18',
+                            }}
+                        />
+                    }
+                    // onClick={() => dispatch(DELETE_BR(record.id))}
+                />
             ),
         },
     ];
@@ -213,7 +200,7 @@ function BorrowReturn() {
                         </div>
                         <Modal
                             className="Modal"
-                            title="Thêm mượn trả"
+                            title="Phiếu mượn"
                             centered
                             open={createModal}
                             onOk={() => {
@@ -328,32 +315,126 @@ function BorrowReturn() {
                                 </Row>
                             </Form>
                         </Modal>
-                        {/* <BookDetailModal
-                            open={detailModal}
-                            onCancel={() => {
-                                dispatch(DELETE_BOOK(selectedBook._id));
+
+                        <Modal
+                            className="Modal"
+                            title="Phiếu trả"
+                            centered
+                            open={returnModal}
+                            onOk={() => {
+                                form.validateFields()
+                                    .then((values) => {
+                                        if (values.type == 'Borrow') {
+                                            Object.assign(values, {
+                                                provider: localStorage.getItem(CLIENT_ID_KEY),
+                                            });
+                                        } else {
+                                            Object.assign(values, {
+                                                receiver: localStorage.getItem(CLIENT_ID_KEY),
+                                            });
+                                        }
+                                        dispatch(CREATE_BR(values));
+                                    })
+                                    .catch((info) => {
+                                        console.log('Validate Failed:', info);
+                                    });
                             }}
-                            code={selectedBook?.code}
-                            name={selectedBook?.name}
-                            category={selectedBook?.category}
-                            department={selectedBook?.department}
-                            author={selectedBook?.author}
-                            publisher={selectedBook?.publisher}
-                            publisherYear={selectedBook?.publisherYear}
-                            language={selectedBook?.language}
-                            summaryContent={selectedBook?.summaryContent}
-                            numberOfPages={selectedBook?.numberOfPages}
-                            pageSize={selectedBook?.pageSize}
-                            republishedTime={selectedBook?.republishedTime}
-                            coverPrice={selectedBook?.coverPrice}
-                            issuedNumber={selectedBook?.issuedNumber}
-                            issuedDate={selectedBook?.issuedDate}
-                            quantity={selectedBook?.quantity}
-                            position={selectedBook?.position}
-                        /> */}
+                            onCancel={() => setCreateModalOpen(false)}
+                            okText="Xác nhận"
+                            cancelText="Hủy"
+                            width={1145}
+                            initialValues={{ remember: true }}
+                            bodyStyle={{
+                                height: 200,
+                                padding: '20, 70, 70, 70',
+                            }}
+                        >
+                            {borrowReturn.state == REQUEST_STATE.REQUEST ? (
+                                <FullPageLoading opacity={0.5} />
+                            ) : (
+                                <div></div>
+                            )}
+                            <Form layout="vertical" autoComplete="off" form={form} initialValues={initialValues}>
+                                <Row
+                                    style={{
+                                        justifyContent: 'space-between',
+                                    }}
+                                >
+                                    <TextInputComponent
+                                        width={300}
+                                        height={40}
+                                        name={'cardNumber'}
+                                        label={'Mã thẻ'}
+                                        placeholder="mã thẻ"
+                                        required={true}
+                                    />
+                                    <TextInputComponent
+                                        width={300}
+                                        height={40}
+                                        name={'document'}
+                                        label={'Tài liệu'}
+                                        placeholder="Tài liệu"
+                                        required={true}
+                                    />
+                                    <TextInputComponent
+                                        width={300}
+                                        height={40}
+                                        name={'borrowType'}
+                                        label={'Kiểu mượn'}
+                                        placeholder="Kiểu mượn"
+                                        required={true}
+                                    />
+                                </Row>
+                                <Row
+                                    style={{
+                                        justifyContent: 'space-between',
+                                    }}
+                                >
+                                    <SelectInputComponent
+                                        width={200}
+                                        height={40}
+                                        name={'type'}
+                                        label={'Loại'}
+                                        placeholder="Loại"
+                                        ruleType="string"
+                                        required={true}
+                                        selectedValue={borrowSelect}
+                                        onChange={(value) => {
+                                            setBorrowSelect(value);
+                                        }}
+                                        listSelect={[
+                                            { label: 'Mượn', value: 'Borrow' },
+                                            { label: 'Trả', value: 'Return' },
+                                        ]}
+                                    />
+                                    <DateInputComponent
+                                        width={200}
+                                        height={40}
+                                        name={'borrowDate'}
+                                        label={'Ngày mượn'}
+                                        placeholder="Ngày mượn"
+                                    />
+                                    <DateInputComponent
+                                        width={200}
+                                        height={40}
+                                        name={'expiredDate'}
+                                        label={'Ngày hết hạn'}
+                                        placeholder="Ngày hết hạn"
+                                    />
+                                    {borrowSelect == 'Borrow' ? null : (
+                                        <DateInputComponent
+                                            width={200}
+                                            height={40}
+                                            name={'returnDate'}
+                                            label={'Ngày trả'}
+                                            placeholder="Ngày trả"
+                                        />
+                                    )}
+                                </Row>
+                            </Form>
+                        </Modal>
                     </Content>
 
-                    {/* {books.state == REQUEST_STATE.REQUEST ? <FullPageLoading opacity={0.5} /> : <div></div>} */}
                 </Layout>
             </Layout>
         </div>
