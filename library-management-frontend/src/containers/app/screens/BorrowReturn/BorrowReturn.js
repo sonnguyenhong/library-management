@@ -304,7 +304,7 @@ function BorrowReturn() {
                                 form.validateFields()
                                     .then((values) => {
                                         const updateData = {
-                                            cardNumber: rowValue.cardNumber,
+                                            cardNumber: rowValue.cardNumber.cardNumber,
                                             document: rowValue.document,
                                             borrowType: rowValue.borrowType,
                                             provider: rowValue.provider,
@@ -314,6 +314,7 @@ function BorrowReturn() {
                                             returnDate: values.returnDate,
                                             receiver: localStorage.getItem(CLIENT_ID_KEY),
                                         };
+                                        
 
                                         dispatch(
                                             UPDATE_BR({
