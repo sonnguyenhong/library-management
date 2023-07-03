@@ -47,36 +47,36 @@ function AppLayout() {
                     }}
                     items={[
                         {
-                            key: '/',
+                            key: '/app/app-layout',
                             icon: <AiTwotoneHome />,
                             label: 'Trang chủ',
                         },
                         {
-                            key: '/manage-book',
+                            key: '/app/app-layout/manage-book',
                             icon: <IoLibrary />,
                             label: 'Quản lý tài liệu',
                         },
                         {
-                            key: '/borrow-return',
+                            key: '/app/app-layout/borrow-return',
                             icon: <FaUserFriends />,
                             label: 'Mượn trả tài liệu',
                         },
                         {
-                            key: '/readers',
+                            key: '/app/app-layout/readers',
                             icon: <FaUserFriends />,
                             label: 'Quản lý bạn đọc',
-                        },
+                        },  
                     ]}
                 />
             </Sider>
 
             <Layout style={{ background: '#fff' }}>
                 <Routes>
-                    <Route exact path="/" element={<Home />} />
-                    <Route exact path="/manage-book" element={<ManageBook />} />
+                    <Route exact path="/app-layout" element={<Home />} />
+                    <Route exact path="/app-layout/manage-book" element={<ManageBook />} />
                     <Route
                         exact
-                        path="/borrow-return"
+                        path="/app-layout/borrow-return"
                         element={
                             <div>
                                 <BorrowReturn />
@@ -85,7 +85,7 @@ function AppLayout() {
                     />
                     <Route
                         exact
-                        path="/readers"
+                        path="/app-layout/readers"
                         element={
                             <div>
                                 <Reader />

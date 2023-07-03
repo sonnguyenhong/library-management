@@ -13,6 +13,10 @@ import {
     DELETE_BR_SUCCESS,
     DELETE_BR_FAIL,
     RESET_DELETE_BR,
+    UPDATE_BR,
+    UPDATE_BR_SUCCESS,
+    UPDATE_BR_FAIL,
+    RESET_UPDATE_BR,
 } from './action';
 
 const defaultState = {
@@ -40,7 +44,7 @@ export function createBrReducer(state = defaultState, action) {
             return {
                 ...state,
                 state: REQUEST_STATE.ERROR,
-                error: error
+                error: error,
             };
         }
         case RESET_CREATE_BR().type: {
@@ -98,6 +102,32 @@ export function deleteBrReducer(state = defaultState, action) {
                 state: REQUEST_STATE.ERROR,
             };
         case RESET_DELETE_BR().type:
+            return {
+                ...defaultState,
+            };
+        default:
+            return state;
+    }
+}
+export function updateBrReducer(state = defaultState, action) {
+    switch (action.type) {
+        case UPDATE_BR().type:
+            return {
+                ...state,
+                state: REQUEST_STATE.REQUEST,
+            };
+        case UPDATE_BR_SUCCESS().type:
+            return {
+                ...state,
+                data: action.payload?.data,
+                state: REQUEST_STATE.SUCCESS,
+            };
+        case UPDATE_BR_FAIL().type:
+            return {
+                ...state,
+                state: REQUEST_STATE.ERROR,
+            };
+        case RESET_UPDATE_BR().type:
             return {
                 ...defaultState,
             };

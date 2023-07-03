@@ -73,3 +73,29 @@ export function RESET_DELETE_BR(payload) {
         payload,
     };
 }
+
+
+export function UPDATE_BR(payload) {
+    return {
+        type: 'UPDATE_BR',
+        payload,
+    };
+}
+export function UPDATE_BR_SUCCESS(payload) {
+    return {
+        type: 'UPDATE_BR_SUCCESS',
+        payload,
+    };
+}
+export function UPDATE_BR_FAIL(payload) {
+    return {
+        type: 'UPDATE_BR_FAIL',
+        payload,
+    };
+}
+export function RESET_UPDATE_BR(payload) {
+    return {
+        type: 'RESET_UPDATE_BR',
+        payload,
+    };
+}

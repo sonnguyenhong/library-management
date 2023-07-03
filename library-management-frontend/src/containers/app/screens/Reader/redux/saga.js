@@ -129,9 +129,10 @@ function* deleteReaderCard({ payload }) {
         }
     } catch (error) {}
 }
+
 function* updateReaderCard(payload) {
     try {
-        const { id, body } = payload;
+        const {id, body} = payload.payload
         const response = yield call(apiUpdateReaderCard, id, body);
         if (response?.state === REQUEST_STATE.SUCCESS) {
             yield put(

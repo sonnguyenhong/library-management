@@ -34,7 +34,7 @@ function Login() {
     };
     useEffect(() => {
         if (user.authState === REQUEST_STATE.SUCCESS) {
-            navigate('/');
+            navigate('/app/app-layout');
         }
         if (user?.authState === REQUEST_STATE.ERROR) {
             notification.error({

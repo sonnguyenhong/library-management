@@ -11,10 +11,14 @@ import {
     GET_LIST_BR,
     GET_LIST_BR_SUCCESS,
     GET_LIST_BR_FAIL,
+    UPDATE_BR_SUCCESS,
+    UPDATE_BR_FAIL,
+    UPDATE_BR,
 } from './action';
 import { apiGetListBr } from 'app-data/borrow-return';
 import { apiCreateBr } from 'app-data/borrow-return';
 import { apiDeleteBr } from 'app-data/borrow-return';
+import { apiUpdateBr } from 'app-data/borrow-return';
 
 function* getListBr({ payload }) {
     try {
@@ -67,9 +71,25 @@ function* deleteBr({ payload }) {
         }
     } catch (error) {}
 }
+function* updateBr({ payload }) {
+    try {
+        const { id, body } = payload;
+        const response = yield call(apiUpdateBr, id, body);
+        if (response?.state === REQUEST_STATE.SUCCESS) {
+            yield put(
+                UPDATE_BR_SUCCESS({
+                    data: response?.data,
+                }),
+            );
+        } else {
+            yield put(UPDATE_BR_FAIL());
+        }
+    } catch (error) {}
+}
 
 export default function* borrowReturnSaga() {
     yield takeLatest(GET_LIST_BR().type, getListBr);
     yield takeLatest(CREATE_BR().type, createBr);
     yield takeLeading(DELETE_BR().type, deleteBr);
+    yield takeLatest(UPDATE_BR().type, updateBr);
 }

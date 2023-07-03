@@ -5,7 +5,11 @@ import booksReducer, {
     createBookReducer,
     deleteBooksReducer,
 } from '../../containers/app/screens/ManageBook/redux/reducer';
-import brReducer, { createBrReducer, deleteBrReducer } from '../../containers/app/screens/BorrowReturn/redux/reducer';
+import brReducer, {
+    createBrReducer,
+    deleteBrReducer,
+    updateBrReducer,
+} from '../../containers/app/screens/BorrowReturn/redux/reducer';
 import readerReducer, {
     createReaderCardReducer,
     createReaderReducer,
@@ -23,6 +27,7 @@ const createReducer = (asyncReducers) => {
         deleteBook: deleteBooksReducer,
         borrowReturn: brReducer,
         createBorrowReturn: createBrReducer,
+        updateBorrowReturn: updateBrReducer,
         reader: readerReducer,
         createReader: createReaderReducer,
         getReaderDetail: getReaderDetailReducer,
