@@ -8,8 +8,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { LOGIN } from 'redux/actions/user';
 import { REQUEST_STATE } from 'app-configs';
+import { Configs } from 'app-configs';
 
 function Login() {
+    console.log(Configs.BASE_API)
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const user = useSelector((state) => state.user);

@@ -1,10 +1,10 @@
 # syntax=docker/dockerfile:1
-FROM node:18-alpine AS builder
+FROM node:16-alpine AS builder
 WORKDIR /app
 COPY . .
 RUN yarn install && yarn build
 
-FROM node:18-alpine as runner
+FROM node:16-alpine as runner
 WORKDIR /app
 COPY . .
 COPY --from=builder /app/node_modules ./node_modules
