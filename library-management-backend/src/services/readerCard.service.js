@@ -9,6 +9,10 @@ class ReaderCardService {
         return await ReaderCardModel.find();
     }
 
+    static async getByCardNumber(cardNumber) {
+        return await ReaderCardModel.findOne({ cardNumber: cardNumber });
+    }
+
     static async getReaderCardById(id) {
         return await ReaderCardModel.findById(id);
     }
