@@ -1,5 +1,5 @@
 export const Configs = {
-    BASE_API: process.env.REACT_APP_BASE_API_URL,
+    BASE_API: 'http://34.173.31.217:8000/api/v1',
     DOMAIN: '',
 };
 export const TOKEN_KEY = 'authencation_COBGBRPIIP';
