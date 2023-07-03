@@ -7,6 +7,10 @@ class DocumentService {
         return await DocumentModel.find();
     }
 
+    static async getByCode(code) {
+        return await DocumentModel.findOne({ code: code });
+    }
+
     static async getDocumentById(id) {
         return await DocumentModel.findById(id)
     }
