@@ -8,7 +8,7 @@ class ReaderService {
     }
 
     static async getReaderById(id) {
-        return await ReaderModel.findById(id);
+        return await ReaderModel.findById(id).populate('readerCards');
     }
 
     static async createReader(payload) {

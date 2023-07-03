@@ -147,6 +147,10 @@ const router = express.Router();
  *                      type: string
  *                  isProcess:
  *                      type: boolean
+ *                  readerCards: 
+ *                      type: array
+ *                      items:
+ *                          type: string
  *          ReaderCard:
  *              type: object
  *              properties:

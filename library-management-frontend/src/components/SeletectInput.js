@@ -2,7 +2,7 @@ import { Form, Select } from "antd";
 import "../assets/css/components/select-input.css";
 
 function SelectInputComponent(props) {
-  const { name, label, width, height, ruleType, required, listSelect } = props;
+  const { name, label, width, height, ruleType, required, listSelect, onChange, selectedValue } = props;
 
   return (
     <Form.Item
@@ -19,7 +19,9 @@ function SelectInputComponent(props) {
           width: width ?? "100%",
           height: height ?? "100%",
         }}
-        defaultValue={listSelect[0].label}
+        defaultValue={listSelect[0].value}
+        value={selectedValue ?? listSelect[0].value }
+        onChange={onChange}
         options={listSelect}
       ></Select>
     </Form.Item>

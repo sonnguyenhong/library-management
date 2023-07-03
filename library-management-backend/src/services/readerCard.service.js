@@ -1,3 +1,5 @@
+const { READER_CARD_ACTIVE_STATUS } = require("../constants/schema.constants");
+const { BadRequestError } = require("../cores/error.response");
 const ReaderModel = require("../models/reader.model");
 const ReaderCardModel = require("../models/readerCard.model");
 const dbConnection = require('mongoose').connection;
@@ -12,7 +14,19 @@ class ReaderCardService {
     }
 
     static async createReaderCard(payload) {
-        return await new ReaderCard(payload).createReaderCard();
+        // Find the reader
+        const reader = await ReaderModel.findById(payload.reader).populate('readerCards');
+        // If the reader already have an active card => Not allow to create new
+        for(let readerCard of reader.readerCards) {
+            if(readerCard.status === READER_CARD_ACTIVE_STATUS) {
+                throw new BadRequestError('Reader already have an active card');
+            }
+        }
+
+        const newReaderCard = await new ReaderCard(payload).createReaderCard();
+        reader.readerCards.push(newReaderCard._id);
+        await reader.save();
+        return newReaderCard;
     }
 
     static async updateReaderCard(id, payload) {
